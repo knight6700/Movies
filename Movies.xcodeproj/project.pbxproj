@@ -23,6 +23,7 @@
 		1E2CB8B12946960F0061286B /* MoviesDetailsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E2CB8B02946960F0061286B /* MoviesDetailsTests.swift */; };
 		1E2CB8B82947EAA80061286B /* MoviesKyes in Frameworks */ = {isa = PBXBuildFile; productRef = 1E2CB8B72947EAA80061286B /* MoviesKyes */; };
 		1EB214A52947F2F30020A620 /* NetworkHerizon in Frameworks */ = {isa = PBXBuildFile; productRef = 1EB214A42947F2F30020A620 /* NetworkHerizon */; };
+		1EB214A82947F64F0020A620 /* AppEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB214A72947F64F0020A620 /* AppEnvironment.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,7 @@
 		1E2CB8B52947EA3A0061286B /* MoviesKyes */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = MoviesKyes; path = dependencies/MoviesKyes; sourceTree = "<group>"; };
 		1E2CB8B62947EA4D0061286B /* MoviesKyesInterfaces */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = MoviesKyesInterfaces; path = dependencies/MoviesKyesInterfaces; sourceTree = "<group>"; };
 		1EB214A32947F2610020A620 /* NetworkHerizon */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = NetworkHerizon; path = Packages/NetworkHerizon; sourceTree = "<group>"; };
+		1EB214A72947F64F0020A620 /* AppEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEnvironment.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +102,7 @@
 		1E2CB85E2945374D0061286B /* Movies */ = {
 			isa = PBXGroup;
 			children = (
+				1EB214A62947F6320020A620 /* Helper */,
 				1E2CB8A2294608E80061286B /* Client */,
 				1E2CB8942945DF410061286B /* Models */,
 				1E2CB889294537580061286B /* App */,
@@ -202,6 +205,14 @@
 				1E2CB8B62947EA4D0061286B /* MoviesKyesInterfaces */,
 			);
 			name = Packages;
+			sourceTree = "<group>";
+		};
+		1EB214A62947F6320020A620 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				1EB214A72947F64F0020A620 /* AppEnvironment.swift */,
+			);
+			path = Helper;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -321,6 +332,7 @@
 				1E2CB8AD29466F090061286B /* MovieDetailsDTO.swift in Sources */,
 				1E2CB8A4294609290061286B /* MoviesCleint.swift in Sources */,
 				1E2CB8AC29466F090061286B /* MoviesDTO.swift in Sources */,
+				1EB214A82947F64F0020A620 /* AppEnvironment.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -518,6 +530,7 @@
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = RELEASE;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;

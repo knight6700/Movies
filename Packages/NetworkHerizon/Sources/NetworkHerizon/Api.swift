@@ -1,9 +1,13 @@
 
 import Foundation
 public struct API {
+    
     var baseURL: CustomStringConvertible {
-        // TODO: - Add More Base URL For Deferent Target
-        "https://api.themoviedb.org/3"
+        #if DEBUG
+        return "https://api.themoviedb.org/3"
+        #elseif RELEASE
+        return "https://api.themoviedb.org/3"
+        #endif
     }
 
     let endpoint: CustomStringConvertible

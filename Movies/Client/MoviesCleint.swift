@@ -2,10 +2,9 @@
 import Foundation
 import NetworkHerizon
 import ComposableArchitecture
-import MoviesKyes
 
 struct MoviesListParameters: Encodable {
-    var apiKey = Keys.Release().moviesAPIKey
+    var apiKey = AppEnvironment.apiKey
     var page: Int?
 }
 
