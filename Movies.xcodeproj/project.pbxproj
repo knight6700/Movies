@@ -160,8 +160,7 @@
 				1E2CB8AB29466F090061286B /* MovieDetailsDTO.swift */,
 				1E2CB8AA29466F090061286B /* MoviesDTO.swift */,
 			);
-			name = MoviesList;
-			path = "ؤ";
+			path = MoviesList;
 			sourceTree = "<group>";
 		};
 		1E2CB89A2945F0210061286B /* MovieDetails */ = {
