@@ -18,11 +18,11 @@
 		1E2CB89C2945F0300061286B /* MovieDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E2CB89B2945F0300061286B /* MovieDetailsView.swift */; };
 		1E2CB89F2946028F0061286B /* PosterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E2CB89E2946028F0061286B /* PosterView.swift */; };
 		1E2CB8A4294609290061286B /* MoviesCleint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E2CB8A3294609290061286B /* MoviesCleint.swift */; };
-		1E2CB8A729460C0E0061286B /* NetworkHerizon in Frameworks */ = {isa = PBXBuildFile; productRef = 1E2CB8A629460C0E0061286B /* NetworkHerizon */; };
 		1E2CB8AC29466F090061286B /* MoviesDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E2CB8AA29466F090061286B /* MoviesDTO.swift */; };
 		1E2CB8AD29466F090061286B /* MovieDetailsDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E2CB8AB29466F090061286B /* MovieDetailsDTO.swift */; };
 		1E2CB8B12946960F0061286B /* MoviesDetailsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E2CB8B02946960F0061286B /* MoviesDetailsTests.swift */; };
 		1E2CB8B82947EAA80061286B /* MoviesKyes in Frameworks */ = {isa = PBXBuildFile; productRef = 1E2CB8B72947EAA80061286B /* MoviesKyes */; };
+		1E2CB8BB2947EDFC0061286B /* NetworkHerizon in Frameworks */ = {isa = PBXBuildFile; productRef = 1E2CB8BA2947EDFC0061286B /* NetworkHerizon */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,13 +46,13 @@
 		1E2CB88D294538940061286B /* MovieCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCardView.swift; sourceTree = "<group>"; };
 		1E2CB89B2945F0300061286B /* MovieDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsView.swift; sourceTree = "<group>"; };
 		1E2CB89E2946028F0061286B /* PosterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PosterView.swift; sourceTree = "<group>"; };
-		1E2CB8A12946080E0061286B /* NetworkHerizon */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = NetworkHerizon; path = Packages/NetworkHerizon; sourceTree = "<group>"; };
 		1E2CB8A3294609290061286B /* MoviesCleint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesCleint.swift; sourceTree = "<group>"; };
 		1E2CB8AA29466F090061286B /* MoviesDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MoviesDTO.swift; path = Movies/Models/MoviesList/MoviesDTO.swift; sourceTree = SOURCE_ROOT; };
 		1E2CB8AB29466F090061286B /* MovieDetailsDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MovieDetailsDTO.swift; path = Movies/Models/MoviesList/MovieDetailsDTO.swift; sourceTree = SOURCE_ROOT; };
 		1E2CB8B02946960F0061286B /* MoviesDetailsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesDetailsTests.swift; sourceTree = "<group>"; };
 		1E2CB8B52947EA3A0061286B /* MoviesKyes */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = MoviesKyes; path = dependencies/MoviesKyes; sourceTree = "<group>"; };
 		1E2CB8B62947EA4D0061286B /* MoviesKyesInterfaces */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = MoviesKyesInterfaces; path = dependencies/MoviesKyesInterfaces; sourceTree = "<group>"; };
+		1E2CB8B92947EDEE0061286B /* NetworkHerizon */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = NetworkHerizon; path = Packages/NetworkHerizon; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,7 +63,7 @@
 				1E2CB891294548E10061286B /* ComposableArchitecture in Frameworks */,
 				1E2CB8B82947EAA80061286B /* MoviesKyes in Frameworks */,
 				1E2CB893294548E10061286B /* Dependencies in Frameworks */,
-				1E2CB8A729460C0E0061286B /* NetworkHerizon in Frameworks */,
+				1E2CB8BB2947EDFC0061286B /* NetworkHerizon in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,7 +81,6 @@
 			isa = PBXGroup;
 			children = (
 				1E2CB8B42947EA3A0061286B /* Packages */,
-				1E2CB8A12946080E0061286B /* NetworkHerizon */,
 				1E2CB85E2945374D0061286B /* Movies */,
 				1E2CB86F2945374E0061286B /* MoviesTests */,
 				1E2CB85D2945374D0061286B /* Products */,
@@ -201,6 +200,7 @@
 			children = (
 				1E2CB8B52947EA3A0061286B /* MoviesKyes */,
 				1E2CB8B62947EA4D0061286B /* MoviesKyesInterfaces */,
+				1E2CB8B92947EDEE0061286B /* NetworkHerizon */,
 			);
 			name = Packages;
 			sourceTree = "<group>";
@@ -224,8 +224,8 @@
 			packageProductDependencies = (
 				1E2CB890294548E10061286B /* ComposableArchitecture */,
 				1E2CB892294548E10061286B /* Dependencies */,
-				1E2CB8A629460C0E0061286B /* NetworkHerizon */,
 				1E2CB8B72947EAA80061286B /* MoviesKyes */,
+				1E2CB8BA2947EDFC0061286B /* NetworkHerizon */,
 			);
 			productName = Movies;
 			productReference = 1E2CB85C2945374D0061286B /* Movies.app */;
@@ -619,13 +619,13 @@
 			package = 1E2CB88F294548E10061286B /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
 			productName = Dependencies;
 		};
-		1E2CB8A629460C0E0061286B /* NetworkHerizon */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = NetworkHerizon;
-		};
 		1E2CB8B72947EAA80061286B /* MoviesKyes */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = MoviesKyes;
+		};
+		1E2CB8BA2947EDFC0061286B /* NetworkHerizon */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = NetworkHerizon;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
