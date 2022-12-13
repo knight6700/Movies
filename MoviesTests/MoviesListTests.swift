@@ -47,8 +47,11 @@ class MoviesListTests: XCTestCase {
         await store.send(.onAppear)
         await store.receive(.loadMovies)
         await store.receive(.moviesResponse(.failure(TestError.invalidData))) {
-            $0.networkState = .error
-            $0.errorMessage = "The operation couldn’t be completed. (MoviesTests.TestError error 0.)"
+            $0.networkState = .loaded
+            $0.alertState = AlertState(
+                title: TextState("Alert!"),
+                message: TextState("The operation couldn’t be completed. (MoviesTests.TestError error 0.)")
+              )
         }
     }
     
