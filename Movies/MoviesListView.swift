@@ -1,6 +1,7 @@
 
 import SwiftUI
 import ComposableArchitecture
+import SwiftUINavigation
 
 enum NetworkState {
     case loading
@@ -150,15 +151,20 @@ struct MoviesListView: View {
                 .onAppear {
                     viewStore.send(.onAppear)
                 }
-                .navigation(item: viewStore.binding(get: \.selectedMovie, send: MoviesList.Action.navigationToDetails)) { _ in
-                    MovieDetailsView(
-                        store:                     store.scope(
-                            state: \.movieDetailsState,
-                            action: MoviesList.Action.movieDetailsAction
+                .navigationDestination(
+                    unwrapping: viewStore.binding(
+                        get: \.selectedMovie,
+                        send: MoviesList.Action.navigationToDetails
+                    ),
+                    destination: { _ in
+                        MovieDetailsView(
+                            store:                     store.scope(
+                                state: \.movieDetailsState,
+                                action: MoviesList.Action.movieDetailsAction
+                            )
                         )
-                    )
-
-                }
+                    }
+                )
             }
             .navigationBarTitleDisplayMode(.inline)
             .navigationTitle("Movies")
@@ -175,31 +181,4 @@ struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         MoviesListView(store: store)
     }
-}
-
-public extension View {
-    func navigation<Item, Destination: View>(
-            item: Binding<Item?>,
-            @ViewBuilder destination: (Item) -> Destination
-        ) -> some View {
-            let isActive = Binding(
-                get: { item.wrappedValue != nil },
-                set: { value in if !value { item.wrappedValue = nil } }
-            )
-            return navigation(isActive: isActive) {
-                item.wrappedValue.map(destination)
-            }
-        }
-    func navigation<Destination: View>(
-            isActive: Binding<Bool>,
-            @ViewBuilder destination: () -> Destination
-        ) -> some View {
-            overlay(
-                NavigationLink(
-                    destination: isActive.wrappedValue ? destination() : nil,
-                    isActive: isActive,
-                    label: { EmptyView() }
-                )
-            )
-        }
 }

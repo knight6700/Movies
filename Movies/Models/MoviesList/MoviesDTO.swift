@@ -9,7 +9,7 @@ struct MoviesDTO: Codable, Equatable {
 }
 
 // MARK: - Result
-struct Movie: Codable, Equatable {
+struct Movie: Codable, Equatable, Hashable {
     let adult: Bool
     let backdropPath: String?
     let genreIDS: [Int]?

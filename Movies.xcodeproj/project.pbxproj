@@ -24,6 +24,8 @@
 		1E2CB8B82947EAA80061286B /* MoviesKyes in Frameworks */ = {isa = PBXBuildFile; productRef = 1E2CB8B72947EAA80061286B /* MoviesKyes */; };
 		1EB214A52947F2F30020A620 /* NetworkHerizon in Frameworks */ = {isa = PBXBuildFile; productRef = 1EB214A42947F2F30020A620 /* NetworkHerizon */; };
 		1EB214A82947F64F0020A620 /* AppEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB214A72947F64F0020A620 /* AppEnvironment.swift */; };
+		1EB214AB294875570020A620 /* SwiftUINavigation in Frameworks */ = {isa = PBXBuildFile; productRef = 1EB214AA294875570020A620 /* SwiftUINavigation */; };
+		1EB214AD294875570020A620 /* _SwiftUINavigationState in Frameworks */ = {isa = PBXBuildFile; productRef = 1EB214AC294875570020A620 /* _SwiftUINavigationState */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +67,8 @@
 				1E2CB891294548E10061286B /* ComposableArchitecture in Frameworks */,
 				1E2CB8B82947EAA80061286B /* MoviesKyes in Frameworks */,
 				1E2CB893294548E10061286B /* Dependencies in Frameworks */,
+				1EB214AB294875570020A620 /* SwiftUINavigation in Frameworks */,
+				1EB214AD294875570020A620 /* _SwiftUINavigationState in Frameworks */,
 				1EB214A52947F2F30020A620 /* NetworkHerizon in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -236,6 +240,8 @@
 				1E2CB892294548E10061286B /* Dependencies */,
 				1E2CB8B72947EAA80061286B /* MoviesKyes */,
 				1EB214A42947F2F30020A620 /* NetworkHerizon */,
+				1EB214AA294875570020A620 /* SwiftUINavigation */,
+				1EB214AC294875570020A620 /* _SwiftUINavigationState */,
 			);
 			productName = Movies;
 			productReference = 1E2CB85C2945374D0061286B /* Movies.app */;
@@ -289,6 +295,7 @@
 			mainGroup = 1E2CB8532945374D0061286B;
 			packageReferences = (
 				1E2CB88F294548E10061286B /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
+				1EB214A9294875570020A620 /* XCRemoteSwiftPackageReference "swiftui-navigation" */,
 			);
 			productRefGroup = 1E2CB85D2945374D0061286B /* Products */;
 			projectDirPath = "";
@@ -618,6 +625,14 @@
 				version = 0.47.2;
 			};
 		};
+		1EB214A9294875570020A620 /* XCRemoteSwiftPackageReference "swiftui-navigation" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swiftui-navigation";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.4.3;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -638,6 +653,16 @@
 		1EB214A42947F2F30020A620 /* NetworkHerizon */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = NetworkHerizon;
+		};
+		1EB214AA294875570020A620 /* SwiftUINavigation */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1EB214A9294875570020A620 /* XCRemoteSwiftPackageReference "swiftui-navigation" */;
+			productName = SwiftUINavigation;
+		};
+		1EB214AC294875570020A620 /* _SwiftUINavigationState */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1EB214A9294875570020A620 /* XCRemoteSwiftPackageReference "swiftui-navigation" */;
+			productName = _SwiftUINavigationState;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
