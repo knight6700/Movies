@@ -84,3 +84,5 @@ vendor/*
 .env
 dependencies/
 *.xcworkspacedata
+
+fastlane/LocalConfig.json
