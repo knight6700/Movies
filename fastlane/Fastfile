@@ -1,0 +1,133 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:ios)
+before_all do
+  puts "Starting operations for a new distribution."
+  @configs = JSON.parse(File.read('./Config.json'), object_class: OpenStruct)
+  @local_configs = JSON.parse(File.read('./LocalConfig.json'), object_class: OpenStruct)
+
+  ENV['MATCH_PASSWORD'] = @local_configs.match_password
+  ENV['MATCH_KEYCHAIN_PASSWORD'] = @local_configs.match_password
+  ENV['FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD'] = @local_configs.apple_application_specific_password
+  ENV["PILOT_USERNAME"] = @configs.apple.username
+  ENV["FASTLANE_USER"] = @configs.apple.username
+  ENV["APP_NAME"] = @configs.apple.app_name
+  ENV["APPLE_ID"] = @configs.apple.apple_id
+  ENV["FASTLANE_TEAM_ID"] = @configs.apple.team_id
+  ENV["FASTLANE_ITC_TEAM_ID"] = @configs.apple.itc_team_id
+  ENV["APP_IDENTIFIER"] = @configs.app_identifier
+end
+
+platform :ios do
+
+  desc "Download and install Certificates and Provision Profiles"
+  lane :install_certificates do
+    match(type: "development", app_identifier: @configs.app_identifier)
+    match(type: "appstore", app_identifier: @configs.app_identifier)
+    match(type: "adhoc", app_identifier: @configs.app_identifier)
+  end
+
+  desc "Upload dsym symbols to crashlytics"
+  lane :upload_dsym do
+    upload_symbols_to_crashlytics(
+      dsym_path: "./Movies.app.dSYM.zip",
+      gsp_path: "./path/GoogleService-Info.plist"
+      )
+  end
+  
+  desc "Upoading a development version and push it to our internal testers"
+  lane :beta do
+
+    # check if git status is clean
+    ensure_git_status_clean
+
+    # Code Signing
+    install_certificates
+
+    # Handle versioning
+    increment_build_number
+
+    # build & archive
+    gym(
+      workspace: "Movies.xcodeproj",
+      scheme: "Movies-Develop",
+      clean: true
+    )
+    
+    # upload dsym to crashlytics
+    upload_dsym
+
+    # upload 
+    pilot(
+      skip_waiting_for_build_processing: true
+    )
+
+    build_number = get_build_number
+    version = get_version_number 
+
+    commit_version_bump(message: "bump development version #{version}-#{build_number}")
+    push_to_git_remote
+
+    slack(
+        message: "Movies Development has been uploaded to TestFlight",
+        success: true,
+        slack_url: @local_configs.slack_webhook_url,
+      )
+
+  end
+
+  desc "Uploading a production version and push it to our internal testers"
+  lane :release do
+  
+    # check if git status is clean
+    ensure_git_status_clean
+  
+    # Code Signing
+    install_certificates
+
+    # increment version number
+    increment_build_number
+
+    # build & archive
+    gym(
+      workspace: "Movies.xcodeproj",
+      scheme: "Movies-Production",
+      xcargs: "-allowProvisioningUpdates",
+      clean: true
+    )
+    
+    # upload dsym to crashlytics
+    upload_dsym
+
+    # upload 
+    pilot(
+      skip_waiting_for_build_processing: true
+    )
+
+    build_number = get_build_number
+    version = get_version_number 
+
+    commit_version_bump(message: "bump production version #{version}-#{build_number}")
+    push_to_git_remote
+
+    slack(
+        message: "Movies Production has been released AppStore. Please wait for its process to be completed.",
+        success: true,
+        slack_url: @local_configs.slack_webhook_url,
+      )
+  end
+
+end

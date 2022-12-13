@@ -1,0 +1,4 @@
+git_url("https://github.com/knight6700/moviesCertificates")
+
+storage_mode("git")
+
