@@ -182,7 +182,7 @@ struct MoviesListView: View {
 }
 
 #if DEBUG
-struct ContentView_Previews: PreviewProvider {
+struct MoviesListView_Previews: PreviewProvider {
    static let store: StoreOf<MoviesList> =
         .init(
         initialState: .init(),
