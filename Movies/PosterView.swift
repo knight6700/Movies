@@ -47,14 +47,21 @@ struct PosterView: View {
                     .foregroundColor(.white)
                     .frame(width: width, height: height)
                     .background(Color.gray)
-                    .cornerRadius(8)
-                    .clipped()
+                    .clipShape(
+                        RoundedRectangle(
+                            cornerRadius: 8
+                        )
+                    )
             case  .empty:
                 ProgressView()
                     .progressViewStyle(CircularProgressViewStyle(tint: Color.white))
                     .frame(width: width, height: height)
-                    .cornerRadius(8)
                     .background(Color.gray)
+                    .clipShape(
+                        RoundedRectangle(
+                            cornerRadius: 8
+                        )
+                    )
             @unknown default:
                 Text("N/A")
                     .frame(width: width, height: height)
