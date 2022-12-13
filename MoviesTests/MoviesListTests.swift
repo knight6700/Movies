@@ -4,10 +4,7 @@ import ComposableArchitecture
 import XCTest
 import XCTestDynamicOverlay
 @testable import Movies
-
-enum TestError: Error, Equatable {
-    case invalidData
-}
+@testable import NetworkHerizon
 
 @MainActor
 class MoviesListTests: XCTestCase {
@@ -42,13 +39,16 @@ class MoviesListTests: XCTestCase {
             initialState: .init(),
           reducer: MoviesList(network: .init(\.moviesNetwork))
         )
-        store.dependencies.moviesNetwork.load = { _ in  throw TestError.invalidData}
+        store.dependencies.moviesNetwork = .failValue
         
         await store.send(.onAppear)
         await store.receive(.loadMovies)
-        await store.receive(.moviesResponse(.failure(TestError.invalidData))) {
-            $0.networkState = .error
-            $0.errorMessage = "The operation couldn’t be completed. (MoviesTests.TestError error 0.)"
+        await store.receive(.moviesResponse(.failure(NetworkError.invalidData))) {
+            $0.networkState = .loaded
+            $0.alertState = AlertState(
+                title: TextState("Alert!"),
+                message: TextState("The operation couldn’t be completed. (NetworkHerizon.NetworkError error 3.)")
+              )
         }
     }
     

@@ -6,13 +6,13 @@ import SwiftUINavigation
 enum NetworkState {
     case loading
     case loaded
-    case error
 }
 // MARK: MoviesList Reducer
 struct MoviesList: ReducerProtocol {
     /// Store all values for presentation Layer
     struct State: Equatable {
         var movieCardState: IdentifiedArrayOf<MovieCard.State> = []
+        var alertState: AlertState<Action>?
         var movieDetailsState: MovieDetails.State {
             get {
                 .init(movie: selectedMovie)
@@ -26,7 +26,6 @@ struct MoviesList: ReducerProtocol {
         
         var networkState: NetworkState = .loading
         var selectedMovie: Movie?
-        var errorMessage = ""
         
         var totalPages: Int = 1
         var currentPage = 1
@@ -49,6 +48,7 @@ struct MoviesList: ReducerProtocol {
         case moviesResponse(TaskResult<MoviesDTO>)
         case loadMovies
         case loadMore
+        case dismissAlert
     }
     
     // MARK: Reducer
@@ -72,8 +72,11 @@ struct MoviesList: ReducerProtocol {
                 state.totalPages = movies.totalPages
                 state.movieCardState.append(contentsOf: movies.results.map{$0.toDomain})
             case let .moviesResponse(.failure(error)):
-                state.networkState = .error
-                state.errorMessage = error.localizedDescription
+                state.networkState = .loaded
+                state.alertState = AlertState(
+                    title: TextState("Alert!"),
+                    message: TextState(error.localizedDescription)
+                  )
             case let .navigationToDetails(model):
                 state.selectedMovie = model
                 return .none
@@ -90,6 +93,8 @@ struct MoviesList: ReducerProtocol {
                 guard state.isHasMorePages else {return .none}
                 state.currentPage += 1
                 return .init(value: .loadMovies)
+            case .dismissAlert:
+                state.alertState = nil
             }
             return .none
         }
@@ -143,15 +148,15 @@ struct MoviesListView: View {
                         if viewStore.isHasMorePages {
                             Text("Loading")
                         }
-
-                    case .error:
-                        Text(viewStore.errorMessage)
                     }
                 }//: LIST
                 .ignoresSafeArea()
                 .scrollIndicators(.hidden)
                 .listStyle(.plain)
                 .padding(.top)
+                .alert(
+                    self.store.scope(state: \.alertState), dismiss: .dismissAlert
+                )
                 .onAppear {
                     viewStore.send(.onAppear)
                 }//: OnAppear

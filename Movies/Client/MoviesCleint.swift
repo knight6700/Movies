@@ -55,6 +55,15 @@ extension MoviesNetowrk: DependencyKey {
         }
     }
     
+    static var failValue: MoviesNetowrk {
+        .init { _ in
+            throw NetworkError.invalidData
+        } loadDetails: { _, _ in
+            throw NetworkError.invalidData
+        }
+
+    }
+    
     
 }
 
