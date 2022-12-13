@@ -1,12 +1,15 @@
 # Movies List App with Details
-# How to Install?
-- open terminal 
-- run `bundle Install`
-- put your env file inside this project
-- run `bundle exec arkana`
-- open xcode resolve package version
+
+## How to Install?
+
+1. `cd PROJECT_PATH_ON_YOUR_MACHINE`
+2. `bundle install`
+3. put your `.env` file in `PROJECT_PATH_ON_YOUR_MACHINE`
+4. `bundle exec arkana`
+5. `xed .`
 
 # Architicture 
+
 ## What is the Composable Architecture?
 This library provides a few core tools that can be used to build applications of varying purpose and complexity. It provides compelling stories that you can follow to solve many problems you encounter day-to-day when building applications, such as:
 * **State management**
@@ -20,8 +23,8 @@ This library provides a few core tools that can be used to build applications of
 * **Ergonomics**
   <br> How to accomplish all of the above in a simple API with as few concepts and moving parts as possible.
 
-For Details you can see the link below: 
-https://github.com/pointfreeco/swift-composable-architecture
+For Details you can see the link below: [Composable Architecture](https://github.com/pointfreeco/swift-composable-architecture)
+
 ## Dependancies
- - Composable Archticture: https://github.com/pointfreeco/swift-composable-architecture
- - SwiftUi Navigation: https://github.com/pointfreeco/swiftui-navigation
+ - [Composable Archticture](https://github.com/pointfreeco/swift-composable-architecture)
+ - [SwiftUI Navigation](https://github.com/pointfreeco/swiftui-navigation)
