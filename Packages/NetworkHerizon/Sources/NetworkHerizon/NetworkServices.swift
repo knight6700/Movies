@@ -1,7 +1,7 @@
 import Foundation
 
 // Cusom Network error
-public enum NetworkError: Error {
+public enum NetworkError: Error, Equatable {
     case requestFailed(description: String)
     case jsonConversionFailure(description: String)
     case invalidData
