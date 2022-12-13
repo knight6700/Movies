@@ -101,6 +101,7 @@ struct MovieDetailsView: View {
     }
 }
 
+#if DEBUG
 struct MovieDetailsView_Previews: PreviewProvider {
     static let store: StoreOf<MovieDetails> =
          .init(
@@ -112,3 +113,4 @@ struct MovieDetailsView_Previews: PreviewProvider {
         MovieDetailsView(store: store)
     }
 }
+#endif

@@ -4,6 +4,10 @@ import SwiftUI
 import ComposableArchitecture
 
 // MARK: Movie Card Reducer
+///  MovieCard Reducer
+/// - Types:  State , Action Equatable >> State also Identifiable for forEach
+/// - Reducer: func to handle action and update state
+
 struct MovieCard: ReducerProtocol {
     // MARK: State
     struct State: Equatable, Identifiable {
@@ -21,7 +25,7 @@ struct MovieCard: ReducerProtocol {
         }
         
         var image: String {
-             movie.fullPosterPath
+            movie.fullPosterPath
         }
     }
     
@@ -32,21 +36,23 @@ struct MovieCard: ReducerProtocol {
     }
     
     // MARK: Reducer
+    ///  reducer
+    /// - Parameters: state inout , action: Action
+    /// - To update state with action cases
     func reduce(into state: inout State, action: Action) -> EffectTask<Action> {
         switch action {
-            // To get last cell to handle state for call more
+            /// To get last cell to handle state for call more
         case .onAppear:
             return .none
-            // To handle selection to navigate to next screen
+            /// To handle selection to navigate to next screen
         case  .onTapped:
             return .none
         }
     }
 }
 
-
-
 struct MovieCardView: View {
+    /// store Take MovieCard Reducer type of ReducerProtocol
     let store: StoreOf<MovieCard>
     var body: some View {
         WithViewStore(store) { viewStore in
@@ -81,3 +87,18 @@ struct MovieCardView: View {
         
     }
 }
+
+#if DEBUG
+struct MovieCardView_Previews: PreviewProvider {
+   static let store: StoreOf<MovieCard> =
+        .init(
+            initialState: .init(movie: .mock),
+        reducer: MovieCard()
+        )
+    static var previews: some View {
+        MovieCardView(store: store)
+            .padding()
+            .previewLayout(.sizeThatFits)
+    }
+}
+#endif

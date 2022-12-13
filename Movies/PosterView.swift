@@ -70,9 +70,16 @@ struct PosterView: View {
     }
 }
 
+#if DEBUG
 struct PosterView_Previews: PreviewProvider {
     static var previews: some View {
-        PosterView(image: "",width: 100, height: 100)
+        PosterView(
+            image: "",
+            width: 100,
+            height: 100
+        )
+        .padding()
+        .previewLayout(.sizeThatFits)
     }
 }
-
+#endif

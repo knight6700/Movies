@@ -8,9 +8,12 @@ enum NetworkState {
     case loaded
     case error
 }
-
+// MARK: MoviesList Reducer
+///  MoviesList Reducer
+/// - Types:  State , Action Equatable
+/// - Reducer: func to handle action and update state
 struct MoviesList: ReducerProtocol {
-    
+    /// Store all values for presentation Layer
     struct State: Equatable {
         var movieCardState: IdentifiedArrayOf<MovieCard.State> = []
         var movieDetailsState: MovieDetails.State {
@@ -38,6 +41,7 @@ struct MoviesList: ReducerProtocol {
             .init(page: currentPage)
         }
     }
+    /// Api Dependancies to handle network fo all env live , test, preview
     @Dependency(\.moviesNetwork) var network
 
     enum Action: Equatable {
@@ -50,6 +54,9 @@ struct MoviesList: ReducerProtocol {
         case loadMore
     }
     
+    // MARK: Reducer
+    ///  body ReducerProtocol
+    /// - To Handlle ation with Scopes for aniother Reducers
     var body: some ReducerProtocol<State, Action> {
         Reduce { state, action in
             switch action {
@@ -98,6 +105,7 @@ struct MoviesList: ReducerProtocol {
                  MovieCard()
              }
         )
+        // Scope MovieDetails
         Scope(state: \.movieDetailsState, action: /Action.movieDetailsAction) {
             MovieDetails()
         }
@@ -120,7 +128,8 @@ struct MoviesListView: View {
                             .scope(state:
                                 \.placeHolder,
                                 action: MoviesList.Action.moveiCardAction(id:action:)),
-                            content: {MovieCardView(store: $0)})
+                            content: {MovieCardView(store: $0)}
+                        )
                         .frame(maxWidth: .infinity)
                         .listRowSeparator(.hidden)
                         .listRowBackground(Color.clear)
@@ -143,14 +152,14 @@ struct MoviesListView: View {
                     case .error:
                         Text(viewStore.errorMessage)
                     }
-                }
+                }//: LIST
                 .ignoresSafeArea()
                 .scrollIndicators(.hidden)
                 .listStyle(.plain)
                 .padding(.top)
                 .onAppear {
                     viewStore.send(.onAppear)
-                }
+                }//: OnAppear
                 .navigationDestination(
                     unwrapping: viewStore.binding(
                         get: \.selectedMovie,
@@ -164,7 +173,7 @@ struct MoviesListView: View {
                             )
                         )
                     }
-                )
+                )//: NavigationDestination
             }
             .navigationBarTitleDisplayMode(.inline)
             .navigationTitle("Movies")
@@ -172,6 +181,7 @@ struct MoviesListView: View {
     }
 }
 
+#if DEBUG
 struct ContentView_Previews: PreviewProvider {
    static let store: StoreOf<MoviesList> =
         .init(
@@ -182,3 +192,4 @@ struct ContentView_Previews: PreviewProvider {
         MoviesListView(store: store)
     }
 }
+#endif
