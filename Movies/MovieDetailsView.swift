@@ -5,7 +5,13 @@ import ComposableArchitecture
 
 struct MovieDetails: ReducerProtocol {
     struct State: Equatable {
+        
         var movie: Movie?
+        
+        var id: Int {
+            movie?.id ?? 0
+        }
+        
         var title: String {
             movieDetails?.title ?? movie?.title ?? ""
         }
@@ -43,10 +49,10 @@ struct MovieDetails: ReducerProtocol {
         case .executeDetails:
             // Run Task for Aysnc calling
             return .task{ [paramters = state.parameters,
-                            id = state.movie?.id] in
+                            id = state.id] in
                 await .responseDetails(
                     TaskResult {
-                        try await self.network.loadDetails(paramters, id ?? 0)
+                        try await self.network.loadDetails(paramters, id)
                     })
             }
 
