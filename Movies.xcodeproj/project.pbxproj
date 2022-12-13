@@ -21,11 +21,12 @@
 		1E2CB8AC29466F090061286B /* MoviesDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E2CB8AA29466F090061286B /* MoviesDTO.swift */; };
 		1E2CB8AD29466F090061286B /* MovieDetailsDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E2CB8AB29466F090061286B /* MovieDetailsDTO.swift */; };
 		1E2CB8B12946960F0061286B /* MoviesDetailsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E2CB8B02946960F0061286B /* MoviesDetailsTests.swift */; };
-		1E2CB8B82947EAA80061286B /* MoviesKyes in Frameworks */ = {isa = PBXBuildFile; productRef = 1E2CB8B72947EAA80061286B /* MoviesKyes */; };
 		1EB214A52947F2F30020A620 /* NetworkHerizon in Frameworks */ = {isa = PBXBuildFile; productRef = 1EB214A42947F2F30020A620 /* NetworkHerizon */; };
 		1EB214A82947F64F0020A620 /* AppEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB214A72947F64F0020A620 /* AppEnvironment.swift */; };
 		1EB214AB294875570020A620 /* SwiftUINavigation in Frameworks */ = {isa = PBXBuildFile; productRef = 1EB214AA294875570020A620 /* SwiftUINavigation */; };
 		1EB214AD294875570020A620 /* _SwiftUINavigationState in Frameworks */ = {isa = PBXBuildFile; productRef = 1EB214AC294875570020A620 /* _SwiftUINavigationState */; };
+		1EB214AF29488DCE0020A620 /* MoviesKyes in Frameworks */ = {isa = PBXBuildFile; productRef = 1EB214AE29488DCE0020A620 /* MoviesKyes */; };
+		1EB214B129488DD60020A620 /* MoviesKyesInterfaces in Frameworks */ = {isa = PBXBuildFile; productRef = 1EB214B029488DD60020A620 /* MoviesKyesInterfaces */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,11 +66,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				1E2CB891294548E10061286B /* ComposableArchitecture in Frameworks */,
-				1E2CB8B82947EAA80061286B /* MoviesKyes in Frameworks */,
 				1E2CB893294548E10061286B /* Dependencies in Frameworks */,
 				1EB214AB294875570020A620 /* SwiftUINavigation in Frameworks */,
 				1EB214AD294875570020A620 /* _SwiftUINavigationState in Frameworks */,
 				1EB214A52947F2F30020A620 /* NetworkHerizon in Frameworks */,
+				1EB214AF29488DCE0020A620 /* MoviesKyes in Frameworks */,
+				1EB214B129488DD60020A620 /* MoviesKyesInterfaces in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -238,10 +240,11 @@
 			packageProductDependencies = (
 				1E2CB890294548E10061286B /* ComposableArchitecture */,
 				1E2CB892294548E10061286B /* Dependencies */,
-				1E2CB8B72947EAA80061286B /* MoviesKyes */,
 				1EB214A42947F2F30020A620 /* NetworkHerizon */,
 				1EB214AA294875570020A620 /* SwiftUINavigation */,
 				1EB214AC294875570020A620 /* _SwiftUINavigationState */,
+				1EB214AE29488DCE0020A620 /* MoviesKyes */,
+				1EB214B029488DD60020A620 /* MoviesKyesInterfaces */,
 			);
 			productName = Movies;
 			productReference = 1E2CB85C2945374D0061286B /* Movies.app */;
@@ -646,10 +649,6 @@
 			package = 1E2CB88F294548E10061286B /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
 			productName = Dependencies;
 		};
-		1E2CB8B72947EAA80061286B /* MoviesKyes */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = MoviesKyes;
-		};
 		1EB214A42947F2F30020A620 /* NetworkHerizon */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = NetworkHerizon;
@@ -663,6 +662,14 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 1EB214A9294875570020A620 /* XCRemoteSwiftPackageReference "swiftui-navigation" */;
 			productName = _SwiftUINavigationState;
+		};
+		1EB214AE29488DCE0020A620 /* MoviesKyes */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = MoviesKyes;
+		};
+		1EB214B029488DD60020A620 /* MoviesKyesInterfaces */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = MoviesKyesInterfaces;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
