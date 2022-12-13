@@ -3,10 +3,7 @@
 ## How to Install?
 
 1. `cd PROJECT_PATH_ON_YOUR_MACHINE`
-2. `bundle install`
-3. put your `.env` file in `PROJECT_PATH_ON_YOUR_MACHINE`
-4. `bundle exec arkana`
-5. `xed .`
+2. `ruby onboarding.rb`
 
 # Architicture 
 
