@@ -9,9 +9,6 @@ enum NetworkState {
     case error
 }
 // MARK: MoviesList Reducer
-///  MoviesList Reducer
-/// - Types:  State , Action Equatable
-/// - Reducer: func to handle action and update state
 struct MoviesList: ReducerProtocol {
     /// Store all values for presentation Layer
     struct State: Equatable {
@@ -49,14 +46,12 @@ struct MoviesList: ReducerProtocol {
         case onAppear
         case navigationToDetails(Movie?)
         case movieDetailsAction(MovieDetails.Action)
-        case responseMovies(TaskResult<MoviesDTO>)
-        case executeMoviesList
+        case moviesResponse(TaskResult<MoviesDTO>)
+        case loadMovies
         case loadMore
     }
     
     // MARK: Reducer
-    ///  body ReducerProtocol
-    /// - To Handlle ation with Scopes for aniother Reducers
     var body: some ReducerProtocol<State, Action> {
         Reduce { state, action in
             switch action {
@@ -71,12 +66,12 @@ struct MoviesList: ReducerProtocol {
                 }
             case  .onAppear:
                 state.selectedMovie = nil
-                return .init(value: .executeMoviesList)
-            case let .responseMovies(.success(movies)):
+                return .init(value: .loadMovies)
+            case let .moviesResponse(.success(movies)):
                 state.networkState = .loaded
                 state.totalPages = movies.totalPages
                 state.movieCardState.append(contentsOf: movies.results.map{$0.toDomain})
-            case let .responseMovies(.failure(error)):
+            case let .moviesResponse(.failure(error)):
                 state.networkState = .error
                 state.errorMessage = error.localizedDescription
             case let .navigationToDetails(model):
@@ -84,9 +79,9 @@ struct MoviesList: ReducerProtocol {
                 return .none
             case .movieDetailsAction(_):
                 return .none
-            case .executeMoviesList:
+            case .loadMovies:
                 return .task { [paramters = state.parameters] in
-                    await .responseMovies(
+                    await .moviesResponse(
                         TaskResult {
                             try await self.network.load(paramters)
                         })
@@ -94,7 +89,7 @@ struct MoviesList: ReducerProtocol {
             case .loadMore:
                 guard state.isHasMorePages else {return .none}
                 state.currentPage += 1
-                return .init(value: .executeMoviesList)
+                return .init(value: .loadMovies)
             }
             return .none
         }
@@ -167,7 +162,7 @@ struct MoviesListView: View {
                     ),
                     destination: { _ in
                         MovieDetailsView(
-                            store:                     store.scope(
+                            store: store.scope(
                                 state: \.movieDetailsState,
                                 action: MoviesList.Action.movieDetailsAction
                             )

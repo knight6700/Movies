@@ -4,9 +4,6 @@ import SwiftUI
 import ComposableArchitecture
 
 // MARK: Movie Card Reducer
-///  MovieCard Reducer
-/// - Types:  State , Action Equatable >> State also Identifiable for forEach
-/// - Reducer: func to handle action and update state
 
 struct MovieCard: ReducerProtocol {
     // MARK: State
@@ -36,18 +33,8 @@ struct MovieCard: ReducerProtocol {
     }
     
     // MARK: Reducer
-    ///  reducer
-    /// - Parameters: state inout , action: Action
-    /// - To update state with action cases
     func reduce(into state: inout State, action: Action) -> EffectTask<Action> {
-        switch action {
-            /// To get last cell to handle state for call more
-        case .onAppear:
-            return .none
-            /// To handle selection to navigate to next screen
-        case  .onTapped:
-            return .none
-        }
+        return .none
     }
 }
 
