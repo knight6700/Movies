@@ -32,7 +32,7 @@ class MoviesListTests: XCTestCase {
         await store.receive(.loadMovies)
         await store.receive(.moviesResponse(.success(response))) {
             $0.networkState = .loaded
-            $0.totalPages = 2
+            $0.totalPages = 1
             $0.movieCardState.append(contentsOf: response.results.map { $0.toDomain })
         }
     }

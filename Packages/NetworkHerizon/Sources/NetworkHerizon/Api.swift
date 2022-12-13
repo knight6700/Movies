@@ -2,11 +2,13 @@
 import Foundation
 public struct API {
     
-    var baseURL: CustomStringConvertible {
+     var baseURL: CustomStringConvertible {
         #if DEBUG
         return "https://api.themoviedb.org/3"
         #elseif RELEASE
         return "https://api.themoviedb.org/3"
+         #else
+         return "https://api.themoviedb.org/3"
         #endif
     }
 
