@@ -15,9 +15,24 @@ struct MoviesApp: App {
         initialState: .init(),
         reducer: MoviesList()
         )
+    @StateObject var network: Monitor = .init()
+    @State var showAlert: Bool = false
+    
     var body: some Scene {
         WindowGroup {
             MoviesListView(store: store)
+                .onChange(of: network) { newValue in
+                    switch newValue.status {
+                    case .connected:
+                        showAlert = false
+                    case .disconnected:
+                        showAlert = true
+                    }
+                }
+                .alert(isPresented: $showAlert) {
+                    Alert(title: Text("Error"), message: Text("Your internet connection is too slow."), dismissButton: .default(Text("ok")))
+                }
+
         }
     }
 }

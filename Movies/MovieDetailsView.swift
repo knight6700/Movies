@@ -27,6 +27,7 @@ struct MovieDetails: ReducerProtocol {
         var overview: String {
             movieDetails?.overview ??  movie?.overview ?? ""
         }
+        var isBack: Bool = false
         
         var movieDetails: MovieDetailsDTO?
 
@@ -37,11 +38,13 @@ struct MovieDetails: ReducerProtocol {
     
     @Dependency(\.moviesNetwork) var network
     
+    
     enum Action: Equatable {
         // Call Api for Details
         case executeDetails
         // Handle result for success and fail response
         case responseDetails(TaskResult<MovieDetailsDTO>)
+        case back(Bool)
     }
     
     func reduce(into state: inout State, action: Action) -> EffectTask<Action> {
@@ -60,6 +63,8 @@ struct MovieDetails: ReducerProtocol {
             state.movieDetails = movieDetails
         case let .responseDetails(.failure(error)):
             print(error)
+        case let .back(isBack):
+            state.isBack = isBack
         }
         return .none
     }
@@ -81,6 +86,9 @@ struct MovieDetailsView: View {
                             width: 300,
                             height: 300
                         )
+                        .onTapGesture {
+                            viewStore.send(.back(true))
+                        }
                         Spacer()
                     }//:HSTACK
                     VStack(alignment: .leading) {
@@ -97,6 +105,11 @@ struct MovieDetailsView: View {
             .onAppear {
                 viewStore.send(.executeDetails)
             }
+            .popover(isPresented: viewStore.binding(get: \.isBack, send: MovieDetails.Action.back), content: {
+                MoviesListView(store: .init(initialState: .init(), reducer: MoviesList()))
+
+            })
+
         }
     }
 }

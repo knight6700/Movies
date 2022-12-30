@@ -1,6 +1,6 @@
 import Foundation
 
-// Cusom Network error
+// Custom Network error
 public enum NetworkError: Error, Equatable {
     case requestFailed(description: String)
     case jsonConversionFailure(description: String)
@@ -9,7 +9,8 @@ public enum NetworkError: Error, Equatable {
     case jsonParsingFailure
     case noInternet
     case failedSerialization
-
+    case badRequest
+    
     public var customDescription: String {
         switch self {
         case let .requestFailed(description): return "Request Failed error -> \(description)"
@@ -19,26 +20,30 @@ public enum NetworkError: Error, Equatable {
         case let .jsonConversionFailure(description): return "JSON Conversion Failure -> \(description)"
         case .noInternet: return "No internet connection"
         case .failedSerialization: return "serialisation print for debug failed."
+        case .badRequest: return " Invalid URL"
         }
     }
 }
 public struct NetworkService {
-
+    
     public init(urlSession: URLSession = URLSession.shared, decoder: JSONDecoder = JSONDecoder()) {
         self.urlSession = urlSession
         self.decoder = decoder
     }
     
-     var urlSession = URLSession.shared
-     var decoder = JSONDecoder()
+    var urlSession = URLSession.shared
+    var decoder = JSONDecoder()
     
     public func fetch<T: Decodable>(
-            type: T.Type,
-            with api: API,
-            body: Encodable?) async throws -> T { // 1
-          
+        type: T.Type,
+        with api: API,
+        body: Encodable?) async throws -> T { // 1
+            guard let urlRequest = generateQueryURLReqst(for: api, body: body)
+            else {
+                throw NetworkError.badRequest
+            }
             // intialise url session
-                let (data, response) = try await urlSession.data(for: generateQueryURLReqst(for: api, body: body))
+            let (data, response) = try await urlSession.data(for: urlRequest)
             guard let httpResponse = response as? HTTPURLResponse else {
                 throw NetworkError.requestFailed(description: "unvalid response")
             }
@@ -52,12 +57,16 @@ public struct NetworkService {
                 return try decoder.decode(type, from: data)
             } catch {
                 // catch error
-                print(error)
                 throw NetworkError.jsonConversionFailure(description: error.localizedDescription)
             }
-        }
-     func generateQueryURLReqst(for api: API, body: Encodable?) -> URLRequest {
-        .init(url: URL(string: "\(api.baseURL)/\(api.endpoint)\(body?.asURLParameter ?? "")")!)
     }
-
+    
+    func generateQueryURLReqst(for api: API, body: Encodable?) -> URLRequest?  {
+        guard let url = URL(string: "\(api.baseURL)/\(api.endpoint)\(body?.asURLParameter ?? "")")
+        else {
+            return nil
+        }
+        return .init(url: url)
+    }
+    
 }
